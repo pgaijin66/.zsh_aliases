@@ -1,0 +1,95 @@
+# Run last command with sudo
+alias fuck='sudo $(fc -ln -1)'													# Run last command with sudo
+
+
+# Process Management
+psinfo() { ps -o pid,ppid,comm,%cpu,%mem  | grep $1; }							# Get PID, PPID, PGID, Command, CPU usage, Memory usage for specific process name
+ptree() { ps -e -o pid,args --forest }
+alias pthread='ps -C java -L -o pid,tid,pcpu,state,nlwp,args'
+
+
+# Top usage
+utop() { top -u $1; }															# Process running under specific username
+
+# Kill command
+alias die='kill -9'
+alias bie='kill -15'
+
+# Python shortcuts
+alias ve='python3 -m venv ./venv'												# create virtual environment
+alias va='source ./venv/bin/activate'											# activate virtual environment
+
+
+# Popular movements
+alias vl='cd /var/logs'															# go to var logs
+alias 
+
+
+# Git shortcust
+alias gs='git status'		
+alias gcl='git clone'
+alias gst='git status -sb'
+alias ga='git add'
+alias gau='git add -u' # Removes deleted files
+alias gp='git pull'
+alias gpu='git push'
+gcm() {																			# Git commit with message
+	git commit -m "$1"
+}
+gcp() {																			# git commit with message and push
+	git commit -m "$1" && git push
+}
+gsc() {																			# Git search with commit messages
+	git log --all -grep="$1"
+}
+alias gco='git checkout'
+alias gl='git log --oneline'
+alias tree='git log --graph --decorate --oneline'								# Git log tree view
+alias revert='git checkout --'
+
+# History
+alias gh='history|grep'															# Search history for certan keyword
+
+
+# list file
+alias resource='source ~/.bash_profile'                                         # Source bash_profile
+alias ll='ls -alh'                                                              # List files
+alias llr='ls -alhr'                                                            # List files (reverse)
+alias lls='ls -alhS'                                                            # List files by size
+alias llsr='ls -alhSr'                                                          # List files by size (reverse)
+alias lld='ls -alht'                                                            # List files by date
+alias lldr='ls -alhtr'                                                          # List files by date (reverse)
+alias lldc='ls -alhtU'                                                          # List files by date created
+alias lldcr='ls -alhtUr'                                                        # List files by date created (reverse)
+alias lt='ls --human-readable --size -1 -S --classify'							# list files by total size
+
+# Navigation shortcuts
+alias ..='../'																	# Go back 1 dir
+alias .2='../../'																# Go back 2 dir
+alias .3='../../../'															# Go back 3 dir
+alias .4='../../../../'															# Go back 4 dir
+alias .5='../../../../../'														# Go back 5 dir
+alias .6='../../../../../../'													# Go back 1 dir
+
+
+# Edit common file
+alias edithost='vi /etc/hosts'	                                               # Edit hosts file
+editssh() { vi /Users/$1/.ssh/config;                                 # Edit ssh file
+alias hm='clear && cd ~'		                                               # Go to home
+alias doc='cd ~/Documents'                                               	   # Go to documents
+alias doc='cd ~/Downloads'                                               	   # Go to downloads
+cs() { cd "$@" &&  ls; }                                                       # Enter directory and list contents with ls
+cl() { cd "$@" && ll; }                                                        # Enter directory and list contents with ll
+
+
+# Tarring a file/folder
+mktar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }    							# Creates a *.tar.gz archive of a file or folder
+mkzip() { zip -r "${1%%/}.zip" "$1" ; }               							# Create a *.zip archive of a file or folder
+
+#  Homebrew
+alias brewup='brew update && brew upgrade && brew cleanup'
+alias brewup-cask='brew update && brew upgrade && brew cleanup && brew cask outdated | awk "{print $1}" | xargs brew cask reinstall && brew cask cleanup'
+
+# Switching shells
+alias shell-to-zsh='chsh -s $(which zsh)'
+alias shell-to-bash='chsh -s $(which bash)'
